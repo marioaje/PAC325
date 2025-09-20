@@ -6,7 +6,7 @@ namespace ProyectoFront.Controllers
     {
         public IActionResult Index()
         {
-            return View();FromBodyAttribute/ ,jlnkfgflnk
+            return View();
         }
     }
 }
