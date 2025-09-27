@@ -18,12 +18,37 @@ namespace ProyectoFront.Controllers
             new Producto{ Id=1, Nombre="Producto 1", Descripcion="Tabla", Precio= 1000, Cantidad=20 },
             new Producto{ Id=2, Nombre="Producto 2", Descripcion="Tabla", Precio=1000, Cantidad=20 },
         };
-        private static int _siguienteIndice = 1;
+        private static int _siguienteIndice = 3;
         //Get
         public IActionResult Index()
         {
             
             return View(_productos);
         }
+
+        //Get
+        public IActionResult Crear()
+        {
+
+            return View();
+        }
+        //Post
+        [HttpPost]
+        public IActionResult Crear(Producto _producto)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _producto.Id = _siguienteIndice++;
+
+                _productos.Add(_producto);
+
+                return RedirectToAction("Index");
+            }
+
+
+            return View(_producto);
+        }
+
     }
 }

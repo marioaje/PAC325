@@ -2,6 +2,14 @@
 
 <h2>Productos</h2>
 
+@* un boton para crear
+ *@
+<a name=""
+   id=""
+   class="btn btn-primary"
+   asp-action="Crear"
+   role="button">Crear</a>
+    
     @*     public int Id { get; set; }
 
         public string Nombre { get; set; }
@@ -18,15 +26,15 @@
                 <th scope="col">Descripcion</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Cantidad</th>
-                
-                
             </tr>
         </thead>
         <tbody>
             @foreach( Producto itemDato in Model)
             {
+                @* tr=fila *@
                 <tr class="">
-                    <td >@itemDato.Id</td>
+                    @* td= columnas *@
+                    <td>@itemDato.Id</td>
                     <td>@itemDato.Nombre</td>
                     <td>@itemDato.Descripcion</td>
                     <td>@itemDato.Precio</td>
