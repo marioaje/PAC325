@@ -50,5 +50,75 @@ namespace ProyectoFront.Controllers
             return View(_producto);
         }
 
+
+        //Get /Editar/Id
+
+        public IActionResult Editar(int id)
+        {
+
+            Producto itemProducto = _productos.FirstOrDefault(x => x.Id == id);
+            if (itemProducto == null)
+            {
+                return NotFound();
+            }
+            return View(itemProducto);
+        }
+
+
+        //Post
+        [HttpPost]
+        public IActionResult Editar(Producto _producto)
+        {
+
+            Producto itemProducto = _productos.FirstOrDefault(x => x.Id == _producto.Id);
+            if (itemProducto == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+
+                itemProducto.Nombre = _producto.Nombre;
+                itemProducto.Descripcion = _producto.Descripcion;
+                itemProducto.Cantidad = _producto.Cantidad;
+                itemProducto.Precio = _producto.Precio;
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            return View(_producto);
+        }
+
+        //Get /Eliminar/Id
+
+        public IActionResult Eliminar (int id)
+        {
+
+            Producto itemProducto = _productos.FirstOrDefault(x => x.Id == id);
+            if (itemProducto == null)
+            {
+                return NotFound();
+            }
+            return View(itemProducto);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Eliminar(Producto _producto)
+        {
+
+            Producto itemProducto = _productos.FirstOrDefault(x => x.Id == _producto.Id);
+            if (itemProducto == null)
+            {
+                return NotFound();
+            }
+
+            _productos.Remove(itemProducto);
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
