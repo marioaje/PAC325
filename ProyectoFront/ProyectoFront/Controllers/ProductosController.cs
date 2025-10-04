@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProyectoFront.Data;
+using ProyectoFront.Models;
 
 namespace ProyectoFront.Controllers
 {
@@ -7,9 +9,7 @@ namespace ProyectoFront.Controllers
     {
 
         //Invocar o hacer una instancia
-
         private readonly AppDbContext _context;
-
 
         //Instanciarme
         public ProductosController (AppDbContext context)
@@ -18,10 +18,10 @@ namespace ProyectoFront.Controllers
         }
 
 
-
-        public IActionResult Index()
+        //Los metodos ahora son asyncronicos
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View( await _context.Producto.ToListAsync());
         }
     }
 }

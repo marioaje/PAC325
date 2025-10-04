@@ -22,7 +22,7 @@ namespace ProyectoFront.Data
         //`Precio` DECIMAL NOT NULL,
         //`Cantidad` INT NOT NULL,
         //PRIMARY KEY(`Id`));
-      //  public DbSet<ProductoModel> Producto { get; set; }
+        public DbSet<ProductoModel> Producto { get; set; }
 
     }
 }

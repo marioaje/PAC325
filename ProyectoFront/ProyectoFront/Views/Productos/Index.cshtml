@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoFront.Models.Producto>
+﻿@model IEnumerable<ProyectoFront.Models.ProductoModel>
 
 <h2>Productos Version MySQL</h2>
 
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach( Producto itemDato in Model)
+            @foreach( ProductoModel itemDato in Model)
             {
                 @* tr=fila *@
                 <tr class="">
