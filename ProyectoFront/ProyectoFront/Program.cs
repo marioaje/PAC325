@@ -3,6 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
+//Establecer mi conexion de mysql
+//Contexto maneja la informacion de la conexion
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
