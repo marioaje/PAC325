@@ -23,5 +23,32 @@ namespace ProyectoFront.Controllers
         {
             return View( await _context.Producto.ToListAsync());
         }
+
+
+        //Crear???
+
+        public IActionResult Crear()
+        {
+
+            return View();
+        }
+
+        //Post
+        [HttpPost]
+        public async Task<IActionResult> Crear(ProductoModel _producto)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                _context.Add(_producto);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+
+            return View(_producto);
+        }
     }
 }
