@@ -13,7 +13,6 @@ namespace ProyectoFront.Data
 
         }
 
-        public DbSet<ProductoModel> Producto { get; set; }
         //Establcemos los modelos de datos.
 
         //      CREATE TABLE `u484426513_pac325`.`Producto` (
@@ -23,5 +22,7 @@ namespace ProyectoFront.Data
         //`Precio` DECIMAL NOT NULL,
         //`Cantidad` INT NOT NULL,
         //PRIMARY KEY(`Id`));
+      //  public DbSet<ProductoModel> Producto { get; set; }
+
     }
 }
