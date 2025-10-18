@@ -1,5 +1,20 @@
+using API.Data;
+using API.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+builder.Services.AddDbContext<AppDbContext>(
+
+    options =>
+           options.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection"))
+
+    );
+
+//Incluir el servicio
+builder.Services.AddScoped<ProductoSerice>();
 // Add services to the container.
 
 builder.Services.AddControllers();
