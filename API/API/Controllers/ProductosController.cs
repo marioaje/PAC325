@@ -29,6 +29,13 @@ namespace API.Controllers
             return _productoSerice.GetProducto();
         }
 
+
+        [HttpGet("{id}")]
+        public ActionResult <ProductoModel> GetByIdProducto(int id)
+        {
+            return _productoSerice.GetByIdProducto(id);
+        }
+
         [HttpPost]
         public ActionResult PostProducto(ProductoModel _productoModel) {
 
@@ -39,10 +46,46 @@ namespace API.Controllers
                     nameof(GetProducto),
                     new
                         {
-                            id = newProducto.Id,
+                            id = newProducto.Precio
                         },
                         newProducto );
 
         }
+
+        [HttpPut]
+        public ActionResult PutProducto(ProductoModel _productoModel)
+        {
+            if ( !_productoSerice.PutProducto(_productoModel))
+            {
+                return NotFound(
+                     new
+                     {
+                         Mensaje ="No se encontro el registro"
+                     }
+                    );
+            }
+
+            return NoContent();
+        }
+
+
+        [HttpDelete]
+        public ActionResult DeleteProducto(int _id)
+        {
+            if (!_productoSerice.DeleteProducto(_id))
+            {
+                return NotFound(
+                     new
+                     {
+                         Mensaje = "No se encontro el registro"
+                     }
+                    );
+            }
+
+            return NoContent();
+
+        }
+
+
     }
 }

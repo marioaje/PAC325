@@ -27,6 +27,15 @@ namespace API.Services
         {
             return _context.Producto.ToList();
         }
+
+
+        //GET/ID
+        public ProductoModel GetByIdProducto(int _id)
+        {
+            return _context.Producto.FirstOrDefault(p => p.Id == _id);
+        }
+
+
         //POST
         public ProductoModel PostProducto(ProductoModel _productoModel)
         {
@@ -39,6 +48,44 @@ namespace API.Services
 
         }
 
+        //PUT
+        public bool PutProducto(ProductoModel _productoModel)
+        {
 
+            var entidad = _context.Producto.FirstOrDefault(p => p.Id == _productoModel.Id);
+
+            if (entidad == null)
+            {
+                return false;
+            }
+
+
+            entidad.Nombre = _productoModel.Nombre;
+            entidad.Precio = _productoModel.Precio;
+            entidad.Cantidad = _productoModel.Cantidad;
+            entidad.Descripcion = _productoModel.Descripcion;
+
+            _context.SaveChanges();
+
+            return true;
+        }
+
+
+        //DELETE
+        public bool DeleteProducto(int _id)
+        {
+
+            var entidad = _context.Producto.FirstOrDefault(p => p.Id == _id);
+
+            if (entidad == null)
+            {
+                return false;
+            }
+
+            _context.Producto.Remove(entidad);
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }
