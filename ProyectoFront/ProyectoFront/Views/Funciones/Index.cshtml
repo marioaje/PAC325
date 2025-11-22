@@ -25,7 +25,7 @@
         <button type="button" name="tipooperacion" value="resta" class="btn btn-secondary">Restar</button>
         <button type="button" name="tipooperacion" value="dividir" class="btn btn-success">Dividir</button>
         <button type="button" name="tipooperacion" value="multiplicar" class="btn btn-danger">Multiplicar</button>
-        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" id="Sumando" class="btn btn-warning">Sumando</button>
         <button type="button" class="btn btn-info">Info</button>
         <button type="button" class="btn btn-light">Light</button>
         <button type="button" class="btn btn-dark">Dark</button>
@@ -35,6 +35,136 @@
     </form>
 
 </div>
+
+<div>
+
+    <table class="table table-primary">
+        <thead>
+            <tr>                
+                <th scope="col">Nombre</th>                                                
+                <th scope="col">Edad</th>
+            </tr>
+        </thead>
+        <tbody id="tablaClientes">
+         
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+
+
+        $( "#Sumando" ).on( "click", function() {
+            guardadatos();
+        });
+
+
+
+        cargarClientes();
+
+
+        function cargarClientes(){
+
+                $.ajax({
+                      type: "GET",
+                      url: "https://paginas-web-cr.com/Api/apis/mongodb.php",
+                      data : { coleccion: "clientes" },
+                      dataType: "json",                    
+                      
+                      success: function( larespuesta ) {
+                        console.log(larespuesta.documentos);
+                        let datosProceso = larespuesta.documentos;
+                        let htmlgeneradopornosotros = "";
+
+                            datosProceso.forEach(itemDato => {
+
+                           htmlgeneradopornosotros += `
+                                            <tr>
+                                                        <td>
+                                                            ${itemDato.nombre}
+                                                        </td>
+                                                        <td>
+                                                            ${itemDato.edad}
+                                                        </td>
+                                            </tr>
+                                `;
+                            });
+
+
+                        
+                            
+
+                        
+
+
+                        $("#tablaClientes").html(htmlgeneradopornosotros);
+                      }
+                    });
+
+
+            
+        }
+
+
+    function guardadatos(){
+    
+
+                 const datoa = $("#datoa").val();
+                 const datob = $("#datob").val();
+
+                 const suma =  datob + datoa;
+                const datosJSON = {
+                   coleccion: "profeMarioDatos",
+                   datos: { 
+                       datoa: datoa, 
+                       datob: datob, 
+                       suma: suma
+                   }
+                };
+
+
+                
+
+                    $.ajax({
+                          type: "POST",
+                          url: "https://paginas-web-cr.com/Api/apis/mongodb.php",
+                          data : JSON.stringify(datosJSON),
+                          contentType:  "application/json",
+                          dataType: "json",
+                          success: function( larespuesta ) {
+                            console.log(larespuesta);
+                            
+                          }
+                        });
+
+
+
+            }
+
+    //         📌 Componente 1 – Listado de Clientes (GET)
+
+    // Ubicación: Columna izquierda
+    // Acción:
+
+    //     Consumir el API:
+    //     GET
+    //     https://paginas-web-cr.com/Api/apis/mongodb.php?coleccion=clientes
+        // {
+        //     "_id": {
+        //         "$oid": "69002d295c9b658d63020191"
+        //     },
+        //     "nombre": "Mario",
+        //     "edad": 40,
+        //     "correo": "mario@gmail.com",
+        //     "ciudad": "San José"
+        // },
+    //     Mostrar la lista en una tabla o tarjetas.
+
+    //     Permitir filtrar por nombre (usando el parámetro &nombre=Mario).
+
+</script>
+
 
 
 @if (Model != null)
